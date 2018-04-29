@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Note me</string>
+    <string name="title_home">Home</string>
+    <string name="title_secrets">Secrets</string>
+    <string name="title_account">Account</string>
+    <string name="login_signup">No account yet? Create one</string>
+</resources>
