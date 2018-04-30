@@ -16,6 +16,7 @@ import com.epiccrown.me.note.noteme.Helpers.DataHelper;
 import com.epiccrown.me.note.noteme.Helpers.MD5helper;
 import com.epiccrown.me.note.noteme.LoginScreen;
 import com.epiccrown.me.note.noteme.R;
+import com.epiccrown.me.note.noteme.User;
 
 /**
  * Created by Epiccrown on 28.04.2018.
@@ -42,7 +43,9 @@ public class HomeFragment extends Fragment {
 
         Cursor cursor = database.query("Login",null,null,null,null,null,null);
         if(cursor.moveToFirst()){
-
+            User.current_id = cursor.getString(2);
+            User.password = cursor.getString(1);
+            User.username = cursor.getString(0);
         }else{
             Intent intent = new Intent(getActivity(), LoginScreen.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);

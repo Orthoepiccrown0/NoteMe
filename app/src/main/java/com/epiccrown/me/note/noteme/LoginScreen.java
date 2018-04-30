@@ -1,5 +1,6 @@
 package com.epiccrown.me.note.noteme;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -35,8 +36,8 @@ public class LoginScreen extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             if(v.getId()==R.id.link_signup){
-
-
+                Intent intent = new Intent(LoginScreen.this,RegisterActivity.class);
+                startActivity(intent);
             }else if(v.getId() == R.id.btn_login){
                 //try to login
             }
