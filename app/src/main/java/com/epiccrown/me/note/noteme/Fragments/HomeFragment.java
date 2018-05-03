@@ -43,13 +43,15 @@ public class HomeFragment extends Fragment {
 
         Cursor cursor = database.query("Login",null,null,null,null,null,null);
         if(cursor.moveToFirst()){
-            User.current_id = cursor.getString(2);
-            User.password = cursor.getString(1);
-            User.username = cursor.getString(0);
+            User.current_id = cursor.getString(3);
+            User.password = cursor.getString(2);
+            User.username = cursor.getString(1);
         }else{
             Intent intent = new Intent(getActivity(), LoginScreen.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         }
+
+        database.close();
     }
 }

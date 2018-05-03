@@ -7,4 +7,6 @@
     <string name="register_button">Register</string>
     <string name="register_logo">Fill all fields</string>
     <string name="login_error_data">Fill all fields</string>
+    <string name="title_activity_scrolling">ScrollingActivity</string>
+    <string name="account_exit">Exit account</string>
 </resources>

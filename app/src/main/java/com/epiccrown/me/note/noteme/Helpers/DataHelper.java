@@ -36,7 +36,7 @@ public class DataHelper extends SQLiteOpenHelper {
     }
 
     public static void deleteUser(SQLiteDatabase db,String username){
-        db.delete("Login","Username=?",new String[]{username});
+        db.delete("Login",null,null);
     }
 
     @Override

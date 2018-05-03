@@ -147,7 +147,7 @@ public class LoginScreen extends AppCompatActivity {
                     DataHelper dataHelper = new DataHelper(LoginScreen.this);
                     SQLiteDatabase db = dataHelper.getWritableDatabase();
                     DataHelper.insertUser(db,username,passwordHash,id);
-
+                    db.close();
                     Intent intent = new Intent(LoginScreen.this,MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
