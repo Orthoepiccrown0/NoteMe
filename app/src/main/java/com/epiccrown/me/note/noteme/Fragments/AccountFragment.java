@@ -2,12 +2,14 @@ package com.epiccrown.me.note.noteme.Fragments;
 
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -20,6 +22,7 @@ import android.widget.TextView;
 import com.epiccrown.me.note.noteme.Helpers.AccountListAdapter;
 import com.epiccrown.me.note.noteme.Helpers.AccountListItem;
 import com.epiccrown.me.note.noteme.Helpers.DataHelper;
+import com.epiccrown.me.note.noteme.Helpers.EditDialog;
 import com.epiccrown.me.note.noteme.LoginScreen;
 import com.epiccrown.me.note.noteme.R;
 import com.epiccrown.me.note.noteme.User;
@@ -51,7 +54,7 @@ public class AccountFragment extends Fragment {
         edit = v.findViewById(R.id.account_edit);
         recyclerView = v.findViewById(R.id.account_recycler_view);
         createAndSetupList();
-
+        edit.setOnClickListener(listener);
         exit.setOnClickListener(listener);
         if(User.username!=null) username.setText(User.username);
         return v;
@@ -81,6 +84,19 @@ public class AccountFragment extends Fragment {
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 }
+            }else if(v.getId() == R.id.account_edit){
+                String url = "https://msg.altervista.org/note_me_rest/change_username.php";
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("url",url);
+                bundle.putSerializable("title","Username");
+                bundle.putSerializable("hint","Insert your new username");
+
+                EditDialog editDialog = new EditDialog();
+                editDialog.setArguments(bundle);
+
+                FragmentManager fragmentManager = getFragmentManager();
+                //editDialog.setTargetFragment(AccountFragment.this,0);
             }
         }
     };

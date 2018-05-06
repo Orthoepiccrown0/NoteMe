@@ -6,8 +6,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.epiccrown.me.note.noteme.R;
@@ -52,16 +54,25 @@ public class AccountListAdapter extends RecyclerView.Adapter<AccountListAdapter.
 
         ImageView imageView;
         TextView textView;
+        RelativeLayout relativeLayout;
         public ItemHolder(View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.account_list_item_image);
             textView = itemView.findViewById(R.id.account_list_item_text);
+            relativeLayout = itemView.findViewById(R.id.account_item_from_list);
 
         }
 
         public void bindItem(AccountListItem item){
             imageView.setImageResource(item.getImage());
             textView.setText(item.getAction());
+
+            relativeLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                   // v.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.elements_click));
+                }
+            });
         }
     }
 }
