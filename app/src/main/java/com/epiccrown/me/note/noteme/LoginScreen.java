@@ -137,17 +137,18 @@ public class LoginScreen extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(s);
                     String username = jsonObject.getString("username");
-                    String passwordHash = jsonObject.getString("password");
+                    //String passwordHash = jsonObject.getString("password");
                     String id = jsonObject.getString("iduser");
 
                     User.current_id = id;
                     User.username = username;
-                    User.password = passwordHash;
+                    //User.password = passwordHash;
 
                     DataHelper dataHelper = new DataHelper(LoginScreen.this);
                     SQLiteDatabase db = dataHelper.getWritableDatabase();
-                    DataHelper.insertUser(db,username,passwordHash,id);
+                    DataHelper.insertUser(db,username,id);
                     db.close();
+                    progressDialog.dismiss();
                     Intent intent = new Intent(LoginScreen.this,MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);

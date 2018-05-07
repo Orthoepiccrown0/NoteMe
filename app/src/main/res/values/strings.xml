@@ -9,6 +9,7 @@
     <string name="login_error_data">Fill all fields</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
     <string name="account_exit">Exit account</string>
-    <string name="account_username_change_error">You can\'t user your old username as a new</string>
+    <string name="account_username_change_error">You can\'t use your old username as a new</string>
     <string name="account_username_change_success">You have changed your username successfully!</string>
+    <string name="account_username_change_exist">The username is already taken!</string>
 </resources>

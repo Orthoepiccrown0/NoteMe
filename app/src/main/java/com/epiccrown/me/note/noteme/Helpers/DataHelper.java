@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.epiccrown.me.note.noteme.User;
+
 /**
  * Created by Epiccrown on 29.04.2018.
  */
@@ -22,21 +24,28 @@ public class DataHelper extends SQLiteOpenHelper {
         String query = "Create Table Login("+
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "Username TEXT,"+
-                "Password TEXT," +
+
                 "IdUser TEXT);";
         db.execSQL(query);
     }
 
-    public static void insertUser(SQLiteDatabase db,String username, String password, String IdUser){
+    public static void insertUser(SQLiteDatabase db,String username, String IdUser){
         ContentValues values = new ContentValues();
         values.put("Username",username);
-        values.put("Password",password);
+
         values.put("IdUser",IdUser);
         db.insert("Login",null, values);
     }
 
     public static void deleteUser(SQLiteDatabase db,String username){
         db.delete("Login",null,null);
+    }
+
+    public static void updateUser(SQLiteDatabase db,String username){
+        ContentValues values = new ContentValues();
+        values.put("Username",username);
+        db.update("Login",values,"Username=?",new String[]{User.username});
+        User.username = username;
     }
 
     @Override

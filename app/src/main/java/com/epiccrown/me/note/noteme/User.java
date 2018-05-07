@@ -7,6 +7,6 @@ package com.epiccrown.me.note.noteme;
 public class User {
     public static String current_id;
     public static String username;
-    public static String password;
+    //public static String password;
     public static Note tmpNote;
 }

@@ -136,16 +136,16 @@ public class RegisterActivity extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(s);
                     String username = jsonObject.getString("username");
-                    String passwordHash = jsonObject.getString("password");
+                    //String passwordHash = jsonObject.getString("password");
                     String id = jsonObject.getString("iduser");
 
                     User.current_id = id;
                     User.username = username;
-                    User.password = passwordHash;
+                    //User.password = passwordHash;
 
                     DataHelper dataHelper = new DataHelper(RegisterActivity.this);
                     SQLiteDatabase db = dataHelper.getWritableDatabase();
-                    DataHelper.insertUser(db,username,passwordHash,id);
+                    DataHelper.insertUser(db,username,id);
 
                     Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
