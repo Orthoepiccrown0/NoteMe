@@ -1,10 +1,12 @@
 package com.epiccrown.me.note.noteme;
 
+import java.io.Serializable;
+
 /**
  * Created by Epiccrown on 29.04.2018.
  */
 
-public class Note {
+public class Note implements Serializable{
     private String id;
     private String content;
     private String header;

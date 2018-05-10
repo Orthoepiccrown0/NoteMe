@@ -1,5 +1,6 @@
 package com.epiccrown.me.note.noteme.Fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -8,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.epiccrown.me.note.noteme.Editor;
 import com.epiccrown.me.note.noteme.Helpers.DataHelper;
 import com.epiccrown.me.note.noteme.Helpers.HomeAdapter;
 import com.epiccrown.me.note.noteme.Helpers.MD5helper;
@@ -41,9 +44,13 @@ public class HomeFragment extends Fragment {
     private List<Note> notes;
     private HomeAdapter homeAdapter;
     private RecyclerView recyclerView;
+    private FloatingActionButton fab;
+
+    private Context mContext;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
     }
 
     @Nullable
@@ -53,8 +60,19 @@ public class HomeFragment extends Fragment {
         tryLogin();
         notes = new ArrayList<>();
         new FetchItems().execute();
-        recyclerView = v.findViewById(R.id.home_recycler_view);
+        recyclerView = v.findViewById(R.id.home_recycler_view_danger);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        mContext = getActivity();
+
+        fab = v.findViewById(R.id.home_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext,Editor.class);
+                startActivity(intent);
+            }
+        });
         return v;
     }
 
@@ -127,6 +145,7 @@ public class HomeFragment extends Fragment {
     private void setupRecycler() {
         if(notes.size()>0) {
             //if(homeAdapter==null)
+
             homeAdapter = new HomeAdapter(getActivity(),notes);
             //homeAdapter.bindNotes(notes);
             recyclerView.setAdapter(homeAdapter);

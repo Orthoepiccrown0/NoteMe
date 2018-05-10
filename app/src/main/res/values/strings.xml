@@ -12,4 +12,7 @@
     <string name="account_username_change_error">You can\'t use your old username as a new</string>
     <string name="account_username_change_success">You have changed your username successfully!</string>
     <string name="account_username_change_exist">The username is already taken!</string>
+    <string name="editor_edittext_header">Header</string>
+    <string name="editor_edittext_content">Content</string>
+    <string name="editor_done">Done</string>
 </resources>
