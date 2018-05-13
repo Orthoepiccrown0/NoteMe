@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <corners
+        android:radius="40dp" />
+    <solid
+        android:color="#ccff90"/>
+    <size
+        android:width="36dp"
+        android:height="36dp" />
+    <stroke
+        android:width="2dp"
+        android:color="#dddd" />
+</shape>
+
+<!--ебнуть еще 11 файлов-->

@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/G:/Program%20files/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_done_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/G:/Program%20files/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/editor/ic_drag_handle_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -29,7 +29,7 @@
                         <option name="values">
                           <map>
                             <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="done" />
+                            <entry key="outputName" value="home_linearl" />
                             <entry key="sourceFile" value="C:\Users\Epiccrown" />
                           </map>
                         </option>

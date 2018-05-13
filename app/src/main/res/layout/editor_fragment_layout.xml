@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/constraintLayout2"
+        android:id="@+id/editor_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_anchorGravity="bottom|center">
@@ -28,7 +28,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/editor_content"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginEnd="8dp"
@@ -40,20 +40,22 @@
             android:hint="@string/editor_edittext_content"
             android:inputType="textMultiLine"
             android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+            app:layout_constraintBottom_toTopOf="@+id/editor_bottom"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/header"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/header" />
 
         <android.support.constraint.ConstraintLayout
-            android:id="@+id/constraintLayout"
+            android:id="@+id/editor_bottom"
             android:layout_width="0dp"
             android:layout_height="48dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+
+            android:elevation="40dp"
+            >
 
             <mehdi.sakout.fancybuttons.FancyButton
                 android:id="@+id/btn_done"
@@ -67,8 +69,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                fancy:fb_borderColor="#FFFFFF"
-                fancy:fb_borderWidth="1dp"
                 fancy:fb_defaultColor="@color/colorAccent"
                 fancy:fb_focusColor="@color/orange_theme"
                 fancy:fb_radius="30dp"
@@ -79,102 +79,100 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
                 android:paddingTop="2dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/btn_done"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                >
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/editor_color_picker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:orientation="horizontal">
 
-                    <View
+                    <View xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:id="@+id/color_bubble_1"
                         android:layout_width="36dp"
                         android:layout_height="36dp"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginEnd="4dp"
-                        android:layout_marginStart="4dp"
-                        android:background="@drawable/color_item" />
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/color_item_1" />
 
-                    <View
+
+                    <View xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:id="@+id/color_bubble_2"
                         android:layout_width="36dp"
                         android:layout_height="36dp"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginEnd="4dp"
                         android:layout_marginStart="4dp"
-                        android:background="@drawable/color_item" />
+                        android:background="@drawable/color_item_2" />
 
-                    <View
+                    <View xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:id="@+id/color_bubble_3"
                         android:layout_width="36dp"
                         android:layout_height="36dp"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginEnd="4dp"
                         android:layout_marginStart="4dp"
-                        android:background="@drawable/color_item" />
+                        android:background="@drawable/color_item_3" />
 
-                    <View
+                    <View xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:id="@+id/color_bubble_4"
                         android:layout_width="36dp"
                         android:layout_height="36dp"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginEnd="4dp"
                         android:layout_marginStart="4dp"
-                        android:background="@drawable/color_item" />
+                        android:background="@drawable/color_item_4" />
 
-                    <View
+                    <View xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:id="@+id/color_bubble_5"
                         android:layout_width="36dp"
                         android:layout_height="36dp"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginEnd="4dp"
                         android:layout_marginStart="4dp"
-                        android:background="@drawable/color_item" />
+                        android:background="@drawable/color_item_5" />
 
-                    <View
+                    <View xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:id="@+id/color_bubble_6"
                         android:layout_width="36dp"
                         android:layout_height="36dp"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginEnd="4dp"
                         android:layout_marginStart="4dp"
-                        android:background="@drawable/color_item" />
+                        android:background="@drawable/color_item_6" />
 
-                    <View
+                    <View xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:id="@+id/color_bubble_7"
                         android:layout_width="36dp"
                         android:layout_height="36dp"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginEnd="4dp"
                         android:layout_marginStart="4dp"
-                        android:background="@drawable/color_item" />
+                        android:background="@drawable/color_item_7" />
 
-                    <View
+                    <View xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:id="@+id/color_bubble_8"
                         android:layout_width="36dp"
                         android:layout_height="36dp"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginEnd="4dp"
                         android:layout_marginStart="4dp"
-                        android:background="@drawable/color_item" />
+                        android:background="@drawable/color_item_8" />
 
-                    <View
+                    <View xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:id="@+id/color_bubble_9"
                         android:layout_width="36dp"
                         android:layout_height="36dp"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginEnd="4dp"
                         android:layout_marginStart="4dp"
-                        android:background="@drawable/color_item" />
-
-                    <View
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:layout_marginEnd="4dp"
-                        android:layout_marginStart="4dp"
-                        android:background="@drawable/color_item" />
-
-                    <View
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:layout_marginEnd="4dp"
-                        android:layout_marginStart="4dp"
-                        android:background="@drawable/color_item" />
-
-                    <View
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:layout_marginEnd="4dp"
-                        android:layout_marginStart="4dp"
-                        android:background="@drawable/color_item" />
-
+                        android:background="@drawable/color_item_9" />
 
                 </LinearLayout>
 

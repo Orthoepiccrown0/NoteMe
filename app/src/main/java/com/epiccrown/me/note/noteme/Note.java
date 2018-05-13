@@ -7,18 +7,18 @@ import java.io.Serializable;
  */
 
 public class Note implements Serializable{
-    private String id;
-    private String content;
-    private String header;
-    private String text_color;
+    private String id="";
+    private String content="";
+    private String header="";
+    private String color_bg="";
 
     public Note() {}
 
-    public Note(String id, String content, String header, String text_color) {
+    public Note(String id, String content, String header, String color_bg) {
         this.id = id;
         this.content = content;
         this.header = header;
-        this.text_color = text_color;
+        this.color_bg = color_bg;
     }
 
 
@@ -50,12 +50,12 @@ public class Note implements Serializable{
         return this;
     }
 
-    public String getText_color() {
-        return text_color;
+    public String getColor_bg() {
+        return color_bg;
     }
 
-    public Note setText_color(String text_color) {
-        this.text_color = text_color;
+    public Note setColor_bg(String color_bg) {
+        this.color_bg = color_bg;
         return this;
     }
 
