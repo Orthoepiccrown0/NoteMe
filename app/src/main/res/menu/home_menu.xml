@@ -3,8 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/home_trash"
+        android:icon="@drawable/trash_bin"
+        android:title="Trash"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/menu_home_layout"
-        android:icon="@drawable/home_linearl"
+        android:icon="@drawable/linearadapter"
         android:title="Change layout"
         app:showAsAction="always" />
 </menu>

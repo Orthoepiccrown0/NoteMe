@@ -15,4 +15,7 @@
     <string name="editor_edittext_header">Header</string>
     <string name="editor_edittext_content">Content</string>
     <string name="editor_done">Done</string>
+    <string name="trash_empty">You have no trash</string>
+    <string name="notes_empty">Start writing notes</string>
+    <string name="trash_clear">Clear trash bin</string>
 </resources>

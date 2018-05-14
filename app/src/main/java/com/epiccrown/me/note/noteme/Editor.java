@@ -19,6 +19,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.epiccrown.me.note.noteme.Fragments.HomeFragment;
+import com.epiccrown.me.note.noteme.Helpers.Sound;
+import com.epiccrown.me.note.noteme.Helpers.SoundPlayer;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -44,7 +46,8 @@ public class Editor extends AppCompatActivity {
     boolean isToEdit = false;
     private String user_id = User.current_id;
     private Note note;
-
+    private SoundPlayer soundsoundPlayer;
+    private boolean isFinishedPlaying= true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +72,7 @@ public class Editor extends AppCompatActivity {
         header.addTextChangedListener(hwatcher);
         content.addTextChangedListener(cwatcher);
 
+        soundsoundPlayer = new SoundPlayer(this);
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
@@ -87,6 +91,23 @@ public class Editor extends AppCompatActivity {
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             curr_content = s.toString();
+
+            if(s.subSequence(start,start+count).toString().toLowerCase().contains("димон")&&isFinishedPlaying){
+                Sound sound = soundsoundPlayer.getSoundByName("dimooon.mp3");
+                soundsoundPlayer.play(sound);
+                isFinishedPlaying = false;
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(5000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        isFinishedPlaying = true;
+                    }
+                }).start();
+            }
         }
 
         @Override
@@ -232,7 +253,6 @@ public class Editor extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... voids) {
             if (!isToEdit) {
-                try {
                     Uri ENDPOINT = Uri.parse("https://msg.altervista.org/note_me_rest/addnote.php");
                     ENDPOINT = ENDPOINT
                             .buildUpon()
@@ -241,22 +261,8 @@ public class Editor extends AppCompatActivity {
                             .appendQueryParameter("header", curr_header)
                             .appendQueryParameter("color", curr_color)
                             .build();
-
-                    URL url = new URL(ENDPOINT.toString());
-
-                    // Read all the text returned by the server
-                    BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-                    String str;
-                    String final_object = "";
-                    while ((str = in.readLine()) != null)
-                        final_object = str;
-
-                    return final_object;
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
+                    return execURL(ENDPOINT);
             } else {
-                try {
                     Uri ENDPOINT = Uri.parse("https://msg.altervista.org/note_me_rest/editnote.php");
                     ENDPOINT = ENDPOINT
                             .buildUpon()
@@ -266,22 +272,22 @@ public class Editor extends AppCompatActivity {
                             .appendQueryParameter("header", curr_header)
                             .appendQueryParameter("color", curr_color)
                             .build();
-
-                    URL url = new URL(ENDPOINT.toString());
-
-                    // Read all the text returned by the server
-                    BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-                    String str;
-                    String final_object = "";
-                    while ((str = in.readLine()) != null)
-                        final_object = str;
-
-                    return final_object;
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
+                    return execURL(ENDPOINT);
             }
-            return null;
+        }
+
+        private String execURL(Uri ENDPOINT){
+           try {
+               URL url = new URL(ENDPOINT.toString());
+
+               BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+               String str;
+               String final_object = "";
+               while ((str = in.readLine()) != null)
+                   final_object = str;
+               return final_object;
+           }catch (Exception ex){ex.printStackTrace();}
+           return null;
         }
 
         @Override

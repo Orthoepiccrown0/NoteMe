@@ -54,6 +54,16 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.NoteHolder> {
         this.notes = notes;
     }
 
+    public void removeItem(int position) {
+        notes.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    public void restoreItem(Note item, int position) {
+        notes.add(position, item);
+        notifyItemInserted(position);
+    }
+
     class NoteHolder extends RecyclerView.ViewHolder{
         TextView header;
         TextView content;
@@ -68,6 +78,12 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.NoteHolder> {
 
         void bindNote(final Note note){
             this.note = note;
+            header.setVisibility(View.VISIBLE);
+            content.setVisibility(View.VISIBLE);
+            note_item_layout.setBackground(mContext.getResources().getDrawable(R.drawable.elements_click));
+            content.setTextSize(14);
+            header.setTextSize(14);
+
             if(note.getHeader().equals("")){
                header.setVisibility(View.GONE);
                content.setTextSize(18);
@@ -82,7 +98,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.NoteHolder> {
             }
             if(!note.getColor_bg().trim().equals(""))
             note_item_layout.setBackground(new ColorDrawable(Color.parseColor(note.getColor_bg())));
-            //edit
 
             note_item_layout.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -94,4 +109,5 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.NoteHolder> {
             });
         }
     }
+
 }
