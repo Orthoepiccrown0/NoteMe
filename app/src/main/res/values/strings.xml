@@ -18,4 +18,6 @@
     <string name="trash_empty">You have no trash</string>
     <string name="notes_empty">Start writing notes</string>
     <string name="trash_clear">Clear trash bin</string>
+    <string name="secure_fingerprints_onetouch">One-touch sign in</string>
+    <string name="secure_fingerprints_usepassword">Or use password</string>
 </resources>

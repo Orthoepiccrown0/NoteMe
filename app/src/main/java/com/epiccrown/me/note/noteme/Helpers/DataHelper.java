@@ -13,7 +13,7 @@ import com.epiccrown.me.note.noteme.User;
 
 public class DataHelper extends SQLiteOpenHelper {
     public static final String nameDB = "NoteMeDB";
-    public static final int DB_VERSION = 1;
+    public static final int DB_VERSION = 2;
 
     public DataHelper(Context context) {
         super(context, nameDB, null, DB_VERSION);
@@ -24,7 +24,6 @@ public class DataHelper extends SQLiteOpenHelper {
         String query = "Create Table Login("+
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "Username TEXT,"+
-
                 "IdUser TEXT);";
         db.execSQL(query);
     }
@@ -32,7 +31,6 @@ public class DataHelper extends SQLiteOpenHelper {
     public static void insertUser(SQLiteDatabase db,String username, String IdUser){
         ContentValues values = new ContentValues();
         values.put("Username",username);
-
         values.put("IdUser",IdUser);
         db.insert("Login",null, values);
     }
@@ -48,8 +46,17 @@ public class DataHelper extends SQLiteOpenHelper {
         User.username = username;
     }
 
+    public static void insertSecretPassword(SQLiteDatabase db,String pass){
+        ContentValues values = new ContentValues();
+        values.put("Password",pass);
+        db.insert("SecureNotes",null, values);
+    }
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        String query = "Create Table SecureNotes("+
+                "_id INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                "Password TEXT);";
+        db.execSQL(query);
     }
 }
