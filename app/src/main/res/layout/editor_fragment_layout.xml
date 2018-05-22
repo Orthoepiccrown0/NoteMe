@@ -57,34 +57,14 @@
             android:elevation="40dp"
             >
 
-            <mehdi.sakout.fancybuttons.FancyButton
-                android:id="@+id/btn_done"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:paddingBottom="10dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:paddingTop="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                fancy:fb_defaultColor="@color/colorAccent"
-                fancy:fb_focusColor="@color/orange_theme"
-                fancy:fb_radius="30dp"
-                fancy:fb_text="@string/editor_done"
-                fancy:fb_textColor="#FFFFFF" />
-
             <HorizontalScrollView
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginEnd="8dp"
                 android:paddingTop="2dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/btn_done"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                >
+                app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
                     android:id="@+id/editor_color_picker"
@@ -170,7 +150,7 @@
                         android:layout_width="36dp"
                         android:layout_height="36dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginEnd="4dp"
+                        android:layout_marginEnd="8dp"
                         android:layout_marginStart="4dp"
                         android:background="@drawable/color_item_9" />
 

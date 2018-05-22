@@ -29,6 +29,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Editor extends AppCompatActivity {
+    public static final String NOTES_TYPE = "Note";
+    public static final String SECRET_TYPE = "Secrets";
+
+
     List<View> bubbles = new ArrayList<>();
     ConstraintLayout editor_background;
     ConstraintLayout bottom_background;
@@ -43,6 +47,7 @@ public class Editor extends AppCompatActivity {
     String curr_header = "";
     String curr_content = "";
 
+    boolean isSecret = false;
     boolean isToEdit = false;
     private String user_id = User.current_id;
     private Note note;
@@ -136,6 +141,7 @@ public class Editor extends AppCompatActivity {
     private void restoreNote(Bundle bundle) {
         try {
             note = (Note) bundle.get("note");
+
             if (note != null) {
                 isToEdit = true;
 
@@ -278,6 +284,9 @@ public class Editor extends AppCompatActivity {
 
         private String execURL(Uri ENDPOINT){
            try {
+               ENDPOINT = ENDPOINT.buildUpon()
+                       .appendQueryParameter("type",User.isSecretToSend ? SECRET_TYPE : NOTES_TYPE)
+                       .build();
                URL url = new URL(ENDPOINT.toString());
 
                BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));

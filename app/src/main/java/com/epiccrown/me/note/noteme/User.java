@@ -8,7 +8,7 @@ public class User {
     public static String current_id;
     public static String username;
     //public static String password;
-    public static Note tmpNote;
+    public static boolean isSecretToSend = false;
 
 
 }

@@ -20,7 +20,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.epiccrown.me.note.noteme.Helpers.HomeAdapter;
+import com.epiccrown.me.note.noteme.Editor;
+import com.epiccrown.me.note.noteme.Helpers.NotesAdapter;
 import com.epiccrown.me.note.noteme.Helpers.PreferencesNoteme;
 import com.epiccrown.me.note.noteme.Note;
 import com.epiccrown.me.note.noteme.R;
@@ -37,7 +38,7 @@ import java.util.List;
 
 public class TrashBin extends Fragment {
     private static List<Note> notes = null;
-    private HomeAdapter homeAdapter;
+    private NotesAdapter notesAdapter;
     private RecyclerView recyclerView;
     private FloatingActionButton fab;
     private SwipeRefreshLayout mSwipeLayout;
@@ -52,7 +53,7 @@ public class TrashBin extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.home_fragment, null);
+        View v = inflater.inflate(R.layout.foreach_notes_screen, null);
         noTrash_text = v.findViewById(R.id.empty_trash_text);
         mSwipeLayout = v.findViewById(R.id.home_swipeRefreshLayout);
         mSwipeLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
@@ -84,6 +85,7 @@ public class TrashBin extends Fragment {
             Uri ENDPOINT = Uri.parse(urls)
                     .buildUpon()
                     .appendQueryParameter("iduser", User.current_id)
+                    .appendQueryParameter("type",User.isSecretToSend ? Editor.SECRET_TYPE : Editor.NOTES_TYPE)
                     .build();
             try {
                 URL url = new URL(ENDPOINT.toString());
@@ -215,14 +217,14 @@ public class TrashBin extends Fragment {
         setupRecyclerLayout();
         if (notes.size() > 0) {
             noTrash_text.setVisibility(View.GONE);
-            //if(homeAdapter==null)
-            if (homeAdapter == null)
-                homeAdapter = new HomeAdapter(getActivity(), notes);
+            //if(notesAdapter==null)
+            if (notesAdapter == null)
+                notesAdapter = new NotesAdapter(getActivity(), notes);
             else {
-                homeAdapter.bindNotes(notes);
-                //homeAdapter.notifyDataSetChanged();
+                notesAdapter.bindNotes(notes);
+                //notesAdapter.notifyDataSetChanged();
             }
-            recyclerView.setAdapter(homeAdapter);
+            recyclerView.setAdapter(notesAdapter);
         } else {
             noTrash_text.setVisibility(View.VISIBLE);
         }

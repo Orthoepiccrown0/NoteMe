@@ -18,15 +18,15 @@ import com.epiccrown.me.note.noteme.R;
 
 import java.util.List;
 
-public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.NoteHolder> {
+public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteHolder> {
     private Context mContext;
     private List<Note> notes;
 
-    public HomeAdapter(Context mContext) {
+    public NotesAdapter(Context mContext) {
         this.mContext = mContext;
     }
 
-    public HomeAdapter(Context mContext, List<Note> notes) {
+    public NotesAdapter(Context mContext, List<Note> notes) {
         this.mContext = mContext;
         this.notes = notes;
     }

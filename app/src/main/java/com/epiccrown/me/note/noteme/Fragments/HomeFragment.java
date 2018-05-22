@@ -31,7 +31,7 @@ import android.widget.Toast;
 
 import com.epiccrown.me.note.noteme.Editor;
 import com.epiccrown.me.note.noteme.Helpers.DataHelper;
-import com.epiccrown.me.note.noteme.Helpers.HomeAdapter;
+import com.epiccrown.me.note.noteme.Helpers.NotesAdapter;
 import com.epiccrown.me.note.noteme.Helpers.PreferencesNoteme;
 import com.epiccrown.me.note.noteme.LoginScreen;
 import com.epiccrown.me.note.noteme.Note;
@@ -54,7 +54,7 @@ import java.util.List;
 
 public class HomeFragment extends Fragment implements Serializable {
     private static List<Note> notes = null;
-    private HomeAdapter homeAdapter;
+    private NotesAdapter notesAdapter;
     private RecyclerView recyclerView;
     private FloatingActionButton fab;
     private SwipeRefreshLayout mSwipeLayout;
@@ -75,7 +75,7 @@ public class HomeFragment extends Fragment implements Serializable {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.home_fragment, null);
+        View v = inflater.inflate(R.layout.foreach_notes_screen, null);
         tryLogin();
         noNotes_image = v.findViewById(R.id.home_nonotes_image);
         noNotes_text = v.findViewById(R.id.home_nonotes_text);
@@ -95,7 +95,7 @@ public class HomeFragment extends Fragment implements Serializable {
         recyclerView = v.findViewById(R.id.home_recycler_view_danger);
         setupRecyclerLayout();
 
-
+        User.isSecretToSend = false;
         fab = v.findViewById(R.id.home_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,6 +135,7 @@ public class HomeFragment extends Fragment implements Serializable {
             Uri ENDPOINT = Uri.parse(urls)
                     .buildUpon()
                     .appendQueryParameter("iduser", User.current_id)
+                    .appendQueryParameter("type","Note")
                     .build();
             try {
                 URL url = new URL(ENDPOINT.toString());
@@ -199,12 +200,14 @@ public class HomeFragment extends Fragment implements Serializable {
         if (notes.size() > 0) {
             noNotes_image.setVisibility(View.GONE);
             noNotes_text.setVisibility(View.GONE);
-            if (homeAdapter == null)
-                homeAdapter = new HomeAdapter(getActivity(), notes);
-            else {
-                homeAdapter.bindNotes(notes);
+            if (notesAdapter == null) {
+                notesAdapter = new NotesAdapter(getActivity(), notes);
+                recyclerView.setAdapter(notesAdapter);
+            }else {
+                notesAdapter.bindNotes(notes);
+                notesAdapter.notifyDataSetChanged();
             }
-            recyclerView.setAdapter(homeAdapter);
+
         } else {
             noNotes_image.setVisibility(View.VISIBLE);
             noNotes_text.setVisibility(View.VISIBLE);
@@ -225,7 +228,7 @@ public class HomeFragment extends Fragment implements Serializable {
                 final Note deletedItem = notes.get(viewHolder.getAdapterPosition());
                 idnote2delete = deletedItem.getId();
                 final int deletedIndex = viewHolder.getAdapterPosition();
-                homeAdapter.removeItem(viewHolder.getAdapterPosition());
+                notesAdapter.removeItem(viewHolder.getAdapterPosition());
                 is2delete = true;
                 new DeleteRestoreItem().execute();
                 Snackbar snackbar = Snackbar
@@ -233,7 +236,7 @@ public class HomeFragment extends Fragment implements Serializable {
                 snackbar.setAction("UNDO", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        homeAdapter.restoreItem(deletedItem, deletedIndex);
+                        notesAdapter.restoreItem(deletedItem, deletedIndex);
                         is2delete = false;
                         new DeleteRestoreItem().execute();
                     }
@@ -291,6 +294,7 @@ public class HomeFragment extends Fragment implements Serializable {
             case R.id.home_trash:
                 try {
                     FragmentManager fragmentManager = getFragmentManager();
+                    User.isSecretToSend = false;
                     Fragment fragment = new TrashBin();
                     fragmentManager.beginTransaction()
                             .replace(R.id.main_holder, fragment)
@@ -321,6 +325,7 @@ public class HomeFragment extends Fragment implements Serializable {
                     .buildUpon()
                     .appendQueryParameter("iduser", User.current_id)
                     .appendQueryParameter("idnote", idnote2delete)
+                    .appendQueryParameter("type","Note")
                     .build();
             return execURL(ENDPOINT);
 
