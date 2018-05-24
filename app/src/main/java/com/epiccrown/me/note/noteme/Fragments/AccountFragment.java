@@ -21,7 +21,6 @@ import android.widget.Toast;
 import com.epiccrown.me.note.noteme.Helpers.AccountListAdapter;
 import com.epiccrown.me.note.noteme.Helpers.AccountListItem;
 import com.epiccrown.me.note.noteme.Helpers.DataHelper;
-import com.epiccrown.me.note.noteme.Helpers.ChangeUsernameDialog;
 import com.epiccrown.me.note.noteme.LoginScreen;
 import com.epiccrown.me.note.noteme.R;
 import com.epiccrown.me.note.noteme.User;
@@ -68,8 +67,9 @@ public class AccountFragment extends Fragment {
 
     private void createAndSetupList() {
         items.clear();
-        items.add(new AccountListItem(R.drawable.account_security,"Security"));
-        items.add(new AccountListItem(R.drawable.account_secret,"Secret"));
+        items.add(new AccountListItem(R.drawable.account_security,"Account password"));
+        items.add(new AccountListItem(R.drawable.account_secret,"Security password"));
+        items.add(new AccountListItem(R.drawable.sad_face,"Delete account"));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         AccountListAdapter listAdapter = new AccountListAdapter(getActivity(),items);
         recyclerView.setAdapter(listAdapter);

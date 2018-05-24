@@ -52,11 +52,22 @@ public class DataHelper extends SQLiteOpenHelper {
         db.insert("SecureNotes",null, values);
     }
 
+    public static boolean changeSecretPassword(SQLiteDatabase db,String pass, String oldpass){
+        ContentValues values = new ContentValues();
+        values.put("Password",pass);
+        return db.update("SecureNotes", values, "Password=?", new String[]{oldpass}) > 0;
+    }
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         String query = "Create Table SecureNotes("+
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "Password TEXT);";
         db.execSQL(query);
+    }
+
+    public static SQLiteDatabase getDB(Context context){
+        DataHelper helper = new DataHelper(context);
+        return helper.getReadableDatabase();
     }
 }

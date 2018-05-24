@@ -1,4 +1,4 @@
-package com.epiccrown.me.note.noteme.Helpers;
+package com.epiccrown.me.note.noteme.Fragments;
 
 import android.app.Dialog;
 import android.app.DialogFragment;

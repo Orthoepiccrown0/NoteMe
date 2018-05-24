@@ -1,7 +1,14 @@
 package com.epiccrown.me.note.noteme.Helpers;
 
+
+import android.app.Activity;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.epiccrown.me.note.noteme.Fragments.ChangePasswordDialog;
 import com.epiccrown.me.note.noteme.R;
 
 import org.w3c.dom.Text;
@@ -43,6 +51,7 @@ public class AccountListAdapter extends RecyclerView.Adapter<AccountListAdapter.
     public void onBindViewHolder(@NonNull ItemHolder holder, int position) {
         AccountListItem item = items.get(position);
         holder.bindItem(item);
+        holder.setIsRecyclable(false);
     }
 
     @Override
@@ -70,7 +79,19 @@ public class AccountListAdapter extends RecyclerView.Adapter<AccountListAdapter.
             relativeLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                   // v.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.elements_click));
+                   String service = textView.getText().toString();
+                   if(service.equals("Account password")){
+
+                   }else if(service.equals("Security password")){
+                       ChangePasswordDialog dialog = new ChangePasswordDialog();
+                       Bundle bundle = new Bundle();
+//                       FragmentManager fm = ((Activity) mContext).getSupportFragmentManager();
+//                       bundle.putString("type","secret");
+//                       dialog.setArguments(bundle);
+//                       dialog.show;
+                   }else if(service.equals("Delete account")){
+
+                   }
                 }
             });
         }
