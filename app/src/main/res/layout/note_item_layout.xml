@@ -26,13 +26,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Header"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            />
 
         <TextView
             android:id="@+id/note_content_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Content" />
+            android:text="Content"
+            />
 
         <View
             android:layout_width="match_parent"

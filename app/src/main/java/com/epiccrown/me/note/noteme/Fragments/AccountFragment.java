@@ -71,7 +71,7 @@ public class AccountFragment extends Fragment {
         items.add(new AccountListItem(R.drawable.account_secret,"Security password"));
         items.add(new AccountListItem(R.drawable.sad_face,"Delete account"));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        AccountListAdapter listAdapter = new AccountListAdapter(getActivity(),items);
+        AccountListAdapter listAdapter = new AccountListAdapter(getActivity(),items,getFragmentManager());
         recyclerView.setAdapter(listAdapter);
 
     }
@@ -120,6 +120,7 @@ public class AccountFragment extends Fragment {
                     DataHelper helper = new DataHelper(getActivity());
                     SQLiteDatabase database = helper.getWritableDatabase();
                     DataHelper.deleteUser(database,User.username);
+                    DataHelper.deleteSecretPass(database);
                     database.close();
                     helper.close();
                     Intent intent = new Intent(getActivity(), LoginScreen.class);

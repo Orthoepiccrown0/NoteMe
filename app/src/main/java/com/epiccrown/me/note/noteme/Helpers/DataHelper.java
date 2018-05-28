@@ -65,6 +65,9 @@ public class DataHelper extends SQLiteOpenHelper {
                 "Password TEXT);";
         db.execSQL(query);
     }
+    public static void deleteSecretPass(SQLiteDatabase db){
+        db.delete("SecureNotes",null,null);
+    }
 
     public static SQLiteDatabase getDB(Context context){
         DataHelper helper = new DataHelper(context);
