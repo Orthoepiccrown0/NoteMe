@@ -156,6 +156,7 @@ public class TrashBin extends Fragment {
             Uri ENDPOINT = Uri.parse(urls)
                     .buildUpon()
                     .appendQueryParameter("iduser", User.current_id)
+                    .appendQueryParameter("type",User.isNoteToTrash ? "Note":"Secrets")
                     .build();
             try {
                 URL url = new URL(ENDPOINT.toString());
@@ -209,6 +210,7 @@ public class TrashBin extends Fragment {
 
         @Override
         protected void onPostExecute(Void aVoid) {
+
             new FetchItems().execute();
         }
     }

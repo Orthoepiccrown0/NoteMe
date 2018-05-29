@@ -26,6 +26,11 @@ public class DataHelper extends SQLiteOpenHelper {
                 "Username TEXT,"+
                 "IdUser TEXT);";
         db.execSQL(query);
+
+        query = "Create Table SecureNotes("+
+                "_id INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                "Password TEXT);";
+        db.execSQL(query);
     }
 
     public static void insertUser(SQLiteDatabase db,String username, String IdUser){
@@ -60,13 +65,10 @@ public class DataHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        String query = "Create Table SecureNotes("+
-                "_id INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                "Password TEXT);";
-        db.execSQL(query);
+
     }
     public static void deleteSecretPass(SQLiteDatabase db){
-        db.delete("SecureNotes",null,null);
+        db.execSQL("Delete From SecureNotes");
     }
 
     public static SQLiteDatabase getDB(Context context){

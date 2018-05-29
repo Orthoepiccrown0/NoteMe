@@ -87,39 +87,42 @@ public class MainActivity extends AppCompatActivity {
             fingerprintManager = (FingerprintManager) getSystemService(FINGERPRINT_SERVICE);
         }
 
+        try {
 
-        textView = (TextView) findViewById(R.id.errorText);
 
-        // Check whether the device has a Fingerprint sensor.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (!fingerprintManager.isHardwareDetected()) {
+            textView = (TextView) findViewById(R.id.errorText);
 
-                textView.setText("Your Device does not have a Fingerprint Sensor");
-            } else {
-                // Checks whether fingerprint permission is set on manifest
-                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.USE_FINGERPRINT) != PackageManager.PERMISSION_GRANTED) {
-                    textView.setText("Fingerprint authentication permission not enabled");
+            // Check whether the device has a Fingerprint sensor.
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (!fingerprintManager.isHardwareDetected()) {
+
+                    textView.setText("Your Device does not have a Fingerprint Sensor");
                 } else {
-                    // Check whether at least one fingerprint is registered
-                    if (!fingerprintManager.hasEnrolledFingerprints()) {
-                        textView.setText("Register at least one fingerprint in Settings");
+                    // Checks whether fingerprint permission is set on manifest
+                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.USE_FINGERPRINT) != PackageManager.PERMISSION_GRANTED) {
+                        textView.setText("Fingerprint authentication permission not enabled");
                     } else {
-                        // Checks whether lock screen security is enabled or not
-                        if (!keyguardManager.isKeyguardSecure()) {
-                            textView.setText("Lock screen security not enabled in Settings");
+                        // Check whether at least one fingerprint is registered
+                        if (!fingerprintManager.hasEnrolledFingerprints()) {
+                            textView.setText("Register at least one fingerprint in Settings");
                         } else {
-                            generateKey();
+                            // Checks whether lock screen security is enabled or not
+                            if (!keyguardManager.isKeyguardSecure()) {
+                                textView.setText("Lock screen security not enabled in Settings");
+                            } else {
+                                generateKey();
 
-                            if (cipherInit()) {
-                                FingerprintManager.CryptoObject cryptoObject = new FingerprintManager.CryptoObject(cipher);
-                                FingerprintHandler helper = new FingerprintHandler(this);
-                                helper.startAuth(fingerprintManager, cryptoObject);
+                                if (cipherInit()) {
+                                    FingerprintManager.CryptoObject cryptoObject = new FingerprintManager.CryptoObject(cipher);
+                                    FingerprintHandler helper = new FingerprintHandler(this);
+                                    helper.startAuth(fingerprintManager, cryptoObject);
+                                }
                             }
                         }
                     }
                 }
             }
-        }
+        }catch (Exception ex){ex.printStackTrace();}
     }
 
     @TargetApi(Build.VERSION_CODES.M)

@@ -96,10 +96,12 @@ public class SecretsFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(getActivity(), Editor.class);
                 startActivity(intent);
             }
         });
+        User.isNoteToTrash = false;
         return v;
     }
 

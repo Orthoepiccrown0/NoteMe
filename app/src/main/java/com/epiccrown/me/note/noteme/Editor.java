@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.epiccrown.me.note.noteme.Fragments.HomeFragment;
+import com.epiccrown.me.note.noteme.Fragments.SecretsFragment;
 import com.epiccrown.me.note.noteme.Helpers.Sound;
 import com.epiccrown.me.note.noteme.Helpers.SoundPlayer;
 
@@ -254,7 +255,7 @@ public class Editor extends AppCompatActivity {
                 Math.min(b, 255));
     }
 
-    @SuppressLint("StaticFieldLeak")
+
     public class SaveEverything extends AsyncTask<Void, Void, String> {
         @Override
         protected String doInBackground(Void... voids) {
@@ -284,6 +285,7 @@ public class Editor extends AppCompatActivity {
 
         private String execURL(Uri ENDPOINT){
            try {
+
                ENDPOINT = ENDPOINT.buildUpon()
                        .appendQueryParameter("type",User.isSecretToSend ? SECRET_TYPE : NOTES_TYPE)
                        .build();
@@ -294,14 +296,19 @@ public class Editor extends AppCompatActivity {
                String final_object = "";
                while ((str = in.readLine()) != null)
                    final_object = str;
+
+
+
                return final_object;
            }catch (Exception ex){ex.printStackTrace();}
+
            return null;
         }
 
         @Override
         protected void onPostExecute(String s) {
 //            super.onPostExecute(s);
+
             if (s != null)
                 if (!s.equals("Success"))
                     Toast.makeText(Editor.this, "Something gone wrong", Toast.LENGTH_SHORT).show();
@@ -309,16 +316,16 @@ public class Editor extends AppCompatActivity {
 
     }
 
+
     @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onPause() {
+        super.onPause();
         String header_text = header.getText().toString().trim();
         String content_text = content.getText().toString().trim();
 
         if (isChanged() && (!content_text.equals("") || !header_text.equals("")))
             new SaveEverything().execute();
     }
-
 
     private boolean isChanged() {
         return !curr_content.equals(bef_content) || !curr_header.equals(bef_header) || !curr_color.equals(bef_color);

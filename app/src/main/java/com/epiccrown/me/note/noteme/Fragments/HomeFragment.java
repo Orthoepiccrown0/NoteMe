@@ -65,6 +65,7 @@ public class HomeFragment extends Fragment implements Serializable {
     private String idnote2delete;
     private boolean is2delete = true;
 
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,6 +105,7 @@ public class HomeFragment extends Fragment implements Serializable {
                 startActivity(intent);
             }
         });
+        User.isNoteToTrash = true;
         return v;
     }
 
@@ -131,6 +133,7 @@ public class HomeFragment extends Fragment implements Serializable {
         @Override
         protected String doInBackground(Void... voids) {
 
+
             String urls = "https://msg.altervista.org/note_me_rest/getnotes.php";
             Uri ENDPOINT = Uri.parse(urls)
                     .buildUpon()
@@ -157,6 +160,8 @@ public class HomeFragment extends Fragment implements Serializable {
         @Override
         protected void onPostExecute(String s) {
             //super.onPostExecute(s);
+            if(mSwipeLayout.isRefreshing())
+            mSwipeLayout.setRefreshing(false);
             if (s != null)
                 if (!s.equals("Empty")) {
                     try {
@@ -179,10 +184,9 @@ public class HomeFragment extends Fragment implements Serializable {
                                     .setHeader(header)
                                     .setColor_bg(color)
                                     .setId(object.getString("idnote"));
-
                             notes.add(note);
                         }
-                        mSwipeLayout.setRefreshing(false);
+
                         setupRecycler();
                     } catch (Exception ex) {
                         ex.printStackTrace();
